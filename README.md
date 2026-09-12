@@ -234,15 +234,17 @@ Every metric is backed by empirical testing, automated suites, or verified conte
 
 ### // 07. DIRECT CONNECTION LINES
 
-```
-  Email       ::  dhairyarupani31@gmail.com
-  LinkedIn    ::  https://linkedin.com/in/dhairya-rupani
-  GitHub      ::  https://github.com/Dhairya0531
-  Portfolio   ::  https://dhairya0531.github.io/portfolio/
-  LeetCode    ::  https://leetcode.com/u/Dhairya05/
-  Codeforces  ::  https://codeforces.com/profile/Dhairya05
-```
-
 <div align="center">
-  <sub>Engineered for resilience and deterministic performance under contention.</sub>
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dhairya-rupani)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Dhairya0531)
+[![Portfolio](https://img.shields.io/badge/Portfolio-0F172A?style=for-the-badge&logo=safari&logoColor=white)](https://dhairya0531.github.io/portfolio/)
+[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/u/Dhairya05/)
+[![Codeforces](https://img.shields.io/badge/Codeforces-1F8ACB?style=for-the-badge&logo=codeforces&logoColor=white)](https://codeforces.com/profile/Dhairya05)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dhairyarupani31@gmail.com)
+
+<br/><br/>
+
+<sub>Engineered for resilience and deterministic performance under contention.</sub>
+
 </div>
