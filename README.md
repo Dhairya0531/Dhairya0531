@@ -108,11 +108,6 @@ My work focuses on the plumbing of software engineering: high-throughput reverse
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Dhairya0531/Complex_Network/main/gridlock_comparison.png" width="92%" alt="Simulation Results: Gridlock and Throughput Comparison Across Controllers" />
-  <p><em>Empirical simulation results: Network-wide gridlock progression and throughput across demand levels for Fixed, Backpressure, and Proposed WTM Centrality Controllers.</em></p>
-</div>
-
 <p align="right">
   <a href="https://github.com/Dhairya0531/Complex_Network"><strong>Explore Repository &rarr;</strong></a>
 </p>
@@ -155,30 +150,71 @@ Organized by engineering discipline and supported by actual repositories:
 <table width="100%">
   <thead>
     <tr>
-      <th width="30%" align="left">Engineering Discipline</th>
-      <th width="70%" align="left">Implemented Technologies &amp; Concepts</th>
+      <th width="24%" align="left">Engineering Discipline</th>
+      <th width="76%" align="left">Technologies &amp; Systems</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>Systems &amp; Backend</strong></td>
-      <td><code>Go</code> · <code>Java</code> · <code>Python</code> · <code>RESTful API Design</code> · <code>Microservices</code> · <code>EWMA Load Balancing</code> · <code>Circuit Breakers</code> · <code>Sliding-Window Rate Limiting</code></td>
+      <td><strong>Languages</strong></td>
+      <td>
+        <img src="https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Go" />
+        <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white" alt="Java" />
+        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+        <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+        <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript" />
+        <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white" alt="SQL" />
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Backend &amp; Systems</strong></td>
+      <td>
+        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js" />
+        <img src="https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white" alt="Express" />
+        <img src="https://img.shields.io/badge/RESTful_APIs-005571?style=flat-square" alt="REST" />
+        <img src="https://img.shields.io/badge/Microservices-24292E?style=flat-square" alt="Microservices" />
+        <img src="https://img.shields.io/badge/EWMA_Load_Balancing-334155?style=flat-square" alt="EWMA" />
+        <img src="https://img.shields.io/badge/Circuit_Breakers-DC2626?style=flat-square" alt="Circuit Breakers" />
+        <img src="https://img.shields.io/badge/Rate_Limiting-EA580C?style=flat-square" alt="Rate Limiting" />
+      </td>
     </tr>
     <tr>
       <td><strong>Storage &amp; State</strong></td>
-      <td><code>PostgreSQL</code> · <code>Redis (Atomic Scripts, Sliding Windows)</code> · <code>MongoDB</code> · <code>MySQL</code></td>
+      <td>
+        <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+        <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white" alt="Redis" />
+        <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB" />
+        <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL" />
+      </td>
     </tr>
     <tr>
       <td><strong>Infrastructure &amp; Cloud</strong></td>
-      <td><code>Docker</code> · <code>Kubernetes (Rolling Updates, HPA)</code> · <code>AWS (EC2, S3, RDS, VPC, IAM)</code> · <code>Linux / Unix</code></td>
+      <td>
+        <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
+        <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white" alt="Kubernetes" />
+        <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white" alt="AWS" />
+        <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux" />
+      </td>
     </tr>
     <tr>
       <td><strong>Observability &amp; SRE</strong></td>
-      <td><code>Prometheus</code> · <code>Grafana</code> · <code>OpenTelemetry (Traces &amp; Context Propagation)</code> · <code>Postman</code> · <code>Git</code></td>
+      <td>
+        <img src="https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white" alt="Prometheus" />
+        <img src="https://img.shields.io/badge/Grafana-F46800?style=flat-square&logo=grafana&logoColor=white" alt="Grafana" />
+        <img src="https://img.shields.io/badge/OpenTelemetry-000000?style=flat-square&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" />
+        <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white" alt="Postman" />
+        <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git" />
+      </td>
     </tr>
     <tr>
       <td><strong>Algorithms &amp; Modeling</strong></td>
-      <td><code>Graph Theory</code> · <code>Betweenness Centrality</code> · <code>NetworkX</code> · <code>OSMnx</code> · <code>Constraint Satisfaction (CSP)</code></td>
+      <td>
+        <img src="https://img.shields.io/badge/Complex_Networks-0284C7?style=flat-square" alt="Complex Networks" />
+        <img src="https://img.shields.io/badge/Betweenness_Centrality-7C3AED?style=flat-square" alt="Centrality" />
+        <img src="https://img.shields.io/badge/NetworkX-000000?style=flat-square&logo=python&logoColor=white" alt="NetworkX" />
+        <img src="https://img.shields.io/badge/OSMnx-7EBC6F?style=flat-square&logo=openstreetmap&logoColor=white" alt="OSM" />
+        <img src="https://img.shields.io/badge/Constraint_Satisfaction_(CSP)-4338CA?style=flat-square" alt="CSP" />
+      </td>
     </tr>
   </tbody>
 </table>
