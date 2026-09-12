@@ -1,140 +1,218 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 350" width="100%" height="100%" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="100%" height="100%" fill="none">
   <defs>
-    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.7">
-        <animate attributeName="stop-color" values="#38bdf8;#818cf8;#34d399;#38bdf8" dur="10s" repeatCount="indefinite" />
+    <!-- Border Gradient with Subtle Animation -->
+    <linearGradient id="hudBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8">
+        <animate attributeName="stop-color" values="#38bdf8;#818cf8;#34d399;#38bdf8" dur="12s" repeatCount="indefinite" />
       </stop>
       <stop offset="50%" stop-color="#818cf8" stop-opacity="0.3">
-        <animate attributeName="stop-color" values="#818cf8;#34d399;#38bdf8;#818cf8" dur="10s" repeatCount="indefinite" />
+        <animate attributeName="stop-color" values="#818cf8;#34d399;#38bdf8;#818cf8" dur="12s" repeatCount="indefinite" />
       </stop>
-      <stop offset="100%" stop-color="#34d399" stop-opacity="0.6">
-        <animate attributeName="stop-color" values="#34d399;#38bdf8;#818cf8;#34d399" dur="10s" repeatCount="indefinite" />
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0.7">
+        <animate attributeName="stop-color" values="#34d399;#38bdf8;#818cf8;#34d399" dur="12s" repeatCount="indefinite" />
       </stop>
     </linearGradient>
 
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0d1117" />
-      <stop offset="100%" stop-color="#080c10" />
+    <!-- Deep Midnight Background -->
+    <linearGradient id="hudBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1017" />
+      <stop offset="100%" stop-color="#070a0f" />
     </linearGradient>
 
-    <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
+    <!-- Sub-panel Background -->
+    <linearGradient id="panelBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111823" />
+      <stop offset="100%" stop-color="#0c121c" />
+    </linearGradient>
+
+    <filter id="hudGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
   <style>
-    @keyframes blinkCursor {
+    @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
-    @keyframes statusPulse {
+    @keyframes pulseLed {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.25); }
+      50% { opacity: 0.35; transform: scale(1.3); }
     }
     .mono {
       font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace;
     }
     .cursor {
-      animation: blinkCursor 1s infinite steps(2, start);
+      animation: blink 0.9s infinite steps(2, start);
     }
-    .pulse-dot {
-      animation: statusPulse 2.2s infinite ease-in-out;
+    .led {
+      animation: pulseLed 2s infinite ease-in-out;
       transform-origin: center;
     }
   </style>
 
-  <!-- Outer Ambient Glow Border -->
-  <rect x="2" y="2" width="846" height="346" rx="12" fill="none" stroke="url(#borderGrad)" stroke-width="1.8" opacity="0.6" filter="url(#softGlow)" />
+  <!-- Ambient Outer Glow -->
+  <rect x="2" y="2" width="896" height="356" rx="12" fill="none" stroke="url(#hudBorder)" stroke-width="1.8" opacity="0.7" filter="url(#hudGlow)" />
 
-  <!-- Terminal Window -->
-  <rect x="2" y="2" width="846" height="346" rx="12" fill="url(#bgGrad)" stroke="#30363d" stroke-width="1" />
+  <!-- Main Chassis -->
+  <rect x="2" y="2" width="896" height="356" rx="12" fill="url(#hudBg)" stroke="#21262d" stroke-width="1" />
 
-  <!-- Window Header Bar -->
-  <path d="M 2,14 A 12,12 0 0 1 14,2 L 836,2 A 12,12 0 0 1 848,14 L 848,36 L 2,36 Z" fill="#161b22" />
-  <line x1="2" y1="36" x2="848" y2="36" stroke="#21262d" stroke-width="1" />
+  <!-- Chrome Header -->
+  <path d="M 2,14 A 12,12 0 0 1 14,2 L 886,2 A 12,12 0 0 1 898,14 L 898,38 L 2,38 Z" fill="#131922" />
+  <line x1="2" y1="38" x2="898" y2="38" stroke="#21262d" stroke-width="1" />
 
-  <!-- macOS Control Buttons -->
-  <circle cx="22" cy="19" r="5" fill="#ff5f56" />
-  <circle cx="38" cy="19" r="5" fill="#ffbd2e" />
-  <circle cx="54" cy="19" r="5" fill="#27c93f" />
+  <!-- macOS Controls -->
+  <circle cx="22" cy="20" r="5" fill="#ff5f56" />
+  <circle cx="38" cy="20" r="5" fill="#ffbd2e" />
+  <circle cx="54" cy="20" r="5" fill="#27c93f" />
 
-  <!-- Title Center -->
-  <text x="425" y="23" fill="#8b949e" font-size="11.5" class="mono" font-weight="500" text-anchor="middle">dhairya@distributed-systems:~ (zsh)</text>
+  <!-- Window Header Title -->
+  <text x="320" y="24" fill="#8b949e" font-size="11.5" class="mono" font-weight="500">dhairya@control-plane:~/systems-command-center (zsh)</text>
 
-  <!-- Live Status Right -->
-  <circle class="pulse-dot" cx="808" cy="19" r="4" fill="#22c55e" />
-  <text x="774" y="23" fill="#22c55e" font-size="10.5" class="mono" font-weight="600" text-anchor="end">SYS: READY</text>
+  <!-- Cluster Status Beacon -->
+  <circle class="led" cx="810" cy="20" r="4.5" fill="#22c55e" />
+  <text x="822" y="24" fill="#22c55e" font-size="10.5" class="mono" font-weight="600">CLUSTER: OPERATIONAL</text>
 
-  <!-- Terminal Content Area -->
-  <g transform="translate(32, 64)">
+  <!-- ================= LEFT: SHELL ENVIRONMENT (Width 530) ================= -->
+  <g transform="translate(24, 58)">
 
     <!-- Command 1: whoami -->
-    <text x="0" y="0" fill="#38bdf8" font-size="13" class="mono" font-weight="700">dhairya@distributed-systems</text>
-    <text x="216" y="0" fill="#8b949e" font-size="13" class="mono">:</text>
-    <text x="226" y="0" fill="#34d399" font-size="13" class="mono" font-weight="600">~</text>
-    <text x="236" y="0" fill="#8b949e" font-size="13" class="mono">$</text>
-    <text x="252" y="0" fill="#f0f6fc" font-size="13" class="mono" font-weight="600">whoami</text>
+    <text x="0" y="0" fill="#38bdf8" font-size="12.5" class="mono" font-weight="700">dhairya@control-plane</text>
+    <text x="180" y="0" fill="#8b949e" font-size="12.5" class="mono">:</text>
+    <text x="190" y="0" fill="#34d399" font-size="12.5" class="mono" font-weight="600">~</text>
+    <text x="200" y="0" fill="#8b949e" font-size="12.5" class="mono">$</text>
+    <text x="214" y="0" fill="#f0f6fc" font-size="12.5" class="mono" font-weight="600">whoami --thesis</text>
 
-    <!-- Output 1 -->
-    <text x="0" y="24" fill="#58a6ff" font-size="15" class="mono" font-weight="700">Dhairya Rupani</text>
-    <text x="0" y="44" fill="#e6edf3" font-size="12.5" class="mono" font-weight="500">Backend &amp; Distributed Systems Engineer</text>
-    <text x="0" y="64" fill="#8b949e" font-size="12" class="mono">Building reliable systems, low-latency APIs, and algorithmic models.</text>
+    <!-- Thesis Output -->
+    <text x="0" y="24" fill="#58a6ff" font-size="16" class="mono" font-weight="700">Dhairya Rupani</text>
+    <text x="145" y="24" fill="#8b949e" font-size="12" class="mono">//</text>
+    <text x="160" y="24" fill="#e6edf3" font-size="12.5" class="mono" font-weight="500">Systems &amp; Backend Engineer</text>
+    <text x="0" y="44" fill="#94a3b8" font-size="11.5" class="mono">Designing high-throughput infrastructure &amp; graph flow models</text>
+    <text x="0" y="60" fill="#94a3b8" font-size="11.5" class="mono">that stay deterministic and fast under severe concurrency.</text>
 
-    <!-- Command 2: cat core_stack.txt -->
-    <g transform="translate(0, 96)">
-      <text x="0" y="0" fill="#38bdf8" font-size="13" class="mono" font-weight="700">dhairya@distributed-systems</text>
-      <text x="216" y="0" fill="#8b949e" font-size="13" class="mono">:</text>
-      <text x="226" y="0" fill="#34d399" font-size="13" class="mono" font-weight="600">~</text>
-      <text x="236" y="0" fill="#8b949e" font-size="13" class="mono">$</text>
-      <text x="252" y="0" fill="#f0f6fc" font-size="13" class="mono" font-weight="600">cat core_stack.txt</text>
+    <!-- Command 2: cat core_stack.env -->
+    <g transform="translate(0, 88)">
+      <text x="0" y="0" fill="#38bdf8" font-size="12.5" class="mono" font-weight="700">dhairya@control-plane</text>
+      <text x="180" y="0" fill="#8b949e" font-size="12.5" class="mono">:</text>
+      <text x="190" y="0" fill="#34d399" font-size="12.5" class="mono" font-weight="600">~</text>
+      <text x="200" y="0" fill="#8b949e" font-size="12.5" class="mono">$</text>
+      <text x="214" y="0" fill="#f0f6fc" font-size="12.5" class="mono" font-weight="600">cat /etc/core_stack.env</text>
 
-      <!-- Clean CLI Stack Box -->
-      <rect x="0" y="14" width="600" height="34" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
-      <text x="18" y="36" fill="#7ee787" font-size="12" class="mono" font-weight="600">Go</text>
-      <text x="44" y="36" fill="#484f58" font-size="12" class="mono">·</text>
-      <text x="58" y="36" fill="#7ee787" font-size="12" class="mono" font-weight="600">Java</text>
-      <text x="98" y="36" fill="#484f58" font-size="12" class="mono">·</text>
-      <text x="112" y="36" fill="#7ee787" font-size="12" class="mono" font-weight="600">PostgreSQL</text>
-      <text x="198" y="36" fill="#484f58" font-size="12" class="mono">·</text>
-      <text x="212" y="36" fill="#7ee787" font-size="12" class="mono" font-weight="600">Redis</text>
-      <text x="256" y="36" fill="#484f58" font-size="12" class="mono">·</text>
-      <text x="270" y="36" fill="#7ee787" font-size="12" class="mono" font-weight="600">Docker</text>
-      <text x="324" y="36" fill="#484f58" font-size="12" class="mono">·</text>
-      <text x="338" y="36" fill="#7ee787" font-size="12" class="mono" font-weight="600">Kubernetes</text>
-      <text x="424" y="36" fill="#484f58" font-size="12" class="mono">·</text>
-      <text x="438" y="36" fill="#7ee787" font-size="12" class="mono" font-weight="600">AWS</text>
+      <!-- Stack Box -->
+      <rect x="0" y="12" width="505" height="30" rx="5" fill="#131a24" stroke="#263345" stroke-width="1" />
+      <text x="14" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">Go</text>
+      <text x="36" y="32" fill="#484f58" font-size="11.5" class="mono">·</text>
+      <text x="48" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">Java</text>
+      <text x="82" y="32" fill="#484f58" font-size="11.5" class="mono">·</text>
+      <text x="94" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">Python</text>
+      <text x="145" y="32" fill="#484f58" font-size="11.5" class="mono">·</text>
+      <text x="157" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">PostgreSQL</text>
+      <text x="238" y="32" fill="#484f58" font-size="11.5" class="mono">·</text>
+      <text x="250" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">Redis</text>
+      <text x="292" y="32" fill="#484f58" font-size="11.5" class="mono">·</text>
+      <text x="304" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">Docker</text>
+      <text x="354" y="32" fill="#484f58" font-size="11.5" class="mono">·</text>
+      <text x="366" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">Kubernetes</text>
+      <text x="450" y="32" fill="#484f58" font-size="11.5" class="mono">·</text>
+      <text x="462" y="32" fill="#7ee787" font-size="11.5" class="mono" font-weight="600">AWS</text>
     </g>
 
-    <!-- Command 3: sysctl -n hw.verified_benchmarks -->
-    <g transform="translate(0, 172)">
-      <text x="0" y="0" fill="#38bdf8" font-size="13" class="mono" font-weight="700">dhairya@distributed-systems</text>
-      <text x="216" y="0" fill="#8b949e" font-size="13" class="mono">:</text>
-      <text x="226" y="0" fill="#34d399" font-size="13" class="mono" font-weight="600">~</text>
-      <text x="236" y="0" fill="#8b949e" font-size="13" class="mono">$</text>
-      <text x="252" y="0" fill="#f0f6fc" font-size="13" class="mono" font-weight="600">sysctl -n hw.verified_benchmarks</text>
+    <!-- Command 3: sysctl telemetry -->
+    <g transform="translate(0, 160)">
+      <text x="0" y="0" fill="#38bdf8" font-size="12.5" class="mono" font-weight="700">dhairya@control-plane</text>
+      <text x="180" y="0" fill="#8b949e" font-size="12.5" class="mono">:</text>
+      <text x="190" y="0" fill="#34d399" font-size="12.5" class="mono" font-weight="600">~</text>
+      <text x="200" y="0" fill="#8b949e" font-size="12.5" class="mono">$</text>
+      <text x="214" y="0" fill="#f0f6fc" font-size="12.5" class="mono" font-weight="600">sysctl -n hw.verified_subsystems</text>
 
-      <text x="0" y="22" fill="#7ee787" font-size="11.5" class="mono">[OK]</text>
-      <text x="42" y="22" fill="#8b949e" font-size="11.5" class="mono">API Gateway Throughput :</text>
-      <text x="230" y="22" fill="#e6edf3" font-size="11.5" class="mono" font-weight="600">10,000+ req/min @ p95 &lt; 2ms (k6 validated)</text>
+      <text x="0" y="20" fill="#34d399" font-size="11" class="mono">[OK]</text>
+      <text x="36" y="20" fill="#8b949e" font-size="11" class="mono">API Gateway Load Test :</text>
+      <text x="200" y="20" fill="#e6edf3" font-size="11" class="mono" font-weight="600">10k+ req/min @ p95 1.89ms (k6 verified)</text>
 
-      <text x="0" y="40" fill="#7ee787" font-size="11.5" class="mono">[OK]</text>
-      <text x="42" y="40" fill="#8b949e" font-size="11.5" class="mono">Complex Network Scale  :</text>
-      <text x="230" y="40" fill="#e6edf3" font-size="11.5" class="mono" font-weight="600">12,846 nodes &amp; 28,412 edges (+198% throughput)</text>
+      <text x="0" y="38" fill="#34d399" font-size="11" class="mono">[OK]</text>
+      <text x="36" y="38" fill="#8b949e" font-size="11" class="mono">Traffic Graph Scale   :</text>
+      <text x="200" y="38" fill="#e6edf3" font-size="11" class="mono" font-weight="600">12,846 nodes | +198% thrpt over Backpressure</text>
 
-      <text x="0" y="58" fill="#7ee787" font-size="11.5" class="mono">[OK]</text>
-      <text x="42" y="58" fill="#8b949e" font-size="11.5" class="mono">Algorithmic Problem-Solving :</text>
-      <text x="230" y="58" fill="#e6edf3" font-size="11.5" class="mono" font-weight="600">LeetCode Knight (1869) · 1,300+ Solved</text>
+      <text x="0" y="56" fill="#34d399" font-size="11" class="mono">[OK]</text>
+      <text x="36" y="56" fill="#8b949e" font-size="11" class="mono">Combinatorial CSP     :</text>
+      <text x="200" y="56" fill="#e6edf3" font-size="11" class="mono" font-weight="600">350+ courses &amp; 2,000+ students in &lt;6 mins</text>
     </g>
 
-    <!-- Active Prompt with cursor -->
-    <g transform="translate(0, 260)">
-      <text x="0" y="0" fill="#38bdf8" font-size="13" class="mono" font-weight="700">dhairya@distributed-systems</text>
-      <text x="216" y="0" fill="#8b949e" font-size="13" class="mono">:</text>
-      <text x="226" y="0" fill="#34d399" font-size="13" class="mono" font-weight="600">~</text>
-      <text x="236" y="0" fill="#8b949e" font-size="13" class="mono">$</text>
-      <text x="252" y="0" fill="#38bdf8" font-size="13" class="mono" font-weight="600">./explore --projects</text>
-      <rect class="cursor" x="424" y="-11" width="8" height="15" fill="#58a6ff" />
+    <!-- Active Prompt with Cursor -->
+    <g transform="translate(0, 246)">
+      <text x="0" y="0" fill="#38bdf8" font-size="12.5" class="mono" font-weight="700">dhairya@control-plane</text>
+      <text x="180" y="0" fill="#8b949e" font-size="12.5" class="mono">:</text>
+      <text x="190" y="0" fill="#34d399" font-size="12.5" class="mono" font-weight="600">~</text>
+      <text x="200" y="0" fill="#8b949e" font-size="12.5" class="mono">$</text>
+      <text x="214" y="0" fill="#38bdf8" font-size="12.5" class="mono" font-weight="600">./explore_portfolio.sh --deep-dive</text>
+      <rect class="cursor" x="502" y="-11" width="7.5" height="15" fill="#58a6ff" />
+    </g>
+
+  </g>
+
+  <!-- Vertical Divider Between Shell and HUD -->
+  <line x1="555" y1="48" x2="555" y2="340" stroke="#21262d" stroke-dasharray="4,4" stroke-width="1" />
+
+  <!-- ================= RIGHT: LIVE SYSTEMS TELEMETRY HUD (Width 320) ================= -->
+  <g transform="translate(575, 58)">
+    
+    <!-- HUD Header -->
+    <text x="0" y="0" fill="#8b949e" font-size="10.5" class="mono" font-weight="700" letter-spacing="0.5">// LIVE SYSTEM STATUS &amp; TELEMETRY</text>
+
+    <!-- Telemetry Card 1: API Gateway -->
+    <g transform="translate(0, 14)">
+      <rect width="295" height="60" rx="6" fill="url(#panelBg)" stroke="#1e293b" stroke-width="1" />
+      <circle cx="14" cy="18" r="3.5" fill="#38bdf8" />
+      <text x="25" y="21" fill="#f1f5f9" font-size="11" font-weight="600" class="mono">DISTRIBUTED API GATEWAY</text>
+      <rect x="238" y="10" width="46" height="16" rx="3" fill="#064e3b" />
+      <text x="244" y="22" fill="#34d399" font-size="8.5" font-weight="700" class="mono">ACTIVE</text>
+      
+      <text x="14" y="40" fill="#64748b" font-size="10" class="mono">Strategy:</text>
+      <text x="74" y="40" fill="#38bdf8" font-size="10" font-weight="500" class="mono">EWMA Latency-Aware</text>
+      <text x="14" y="52" fill="#64748b" font-size="10" class="mono">Observed:</text>
+      <text x="74" y="52" fill="#e2e8f0" font-size="10" font-weight="600" class="mono">p95 1.89ms | 0 errors</text>
+    </g>
+
+    <!-- Telemetry Card 2: Complex Networks -->
+    <g transform="translate(0, 84)">
+      <rect width="295" height="60" rx="6" fill="url(#panelBg)" stroke="#1e293b" stroke-width="1" />
+      <circle cx="14" cy="18" r="3.5" fill="#f59e0b" />
+      <text x="25" y="21" fill="#f1f5f9" font-size="11" font-weight="600" class="mono">TRAFFIC TOPOLOGY ENGINE</text>
+      <rect x="238" y="10" width="46" height="16" rx="3" fill="#312e81" />
+      <text x="243" y="22" fill="#a5b4fc" font-size="8.5" font-weight="700" class="mono">+198%</text>
+
+      <text x="14" y="40" fill="#64748b" font-size="10" class="mono">Centrality:</text>
+      <text x="90" y="40" fill="#f59e0b" font-size="10" font-weight="500" class="mono">Betweenness Graph Hub</text>
+      <text x="14" y="52" fill="#64748b" font-size="10" class="mono">Scale:</text>
+      <text x="90" y="52" fill="#e2e8f0" font-size="10" font-weight="600" class="mono">12,846 nodes | 4 Metros</text>
+    </g>
+
+    <!-- Telemetry Card 3: Competitive Programming & Rigor -->
+    <g transform="translate(0, 154)">
+      <rect width="295" height="60" rx="6" fill="url(#panelBg)" stroke="#1e293b" stroke-width="1" />
+      <circle cx="14" cy="18" r="3.5" fill="#c084fc" />
+      <text x="25" y="21" fill="#f1f5f9" font-size="11" font-weight="600" class="mono">ALGORITHMIC RIGOR</text>
+      <rect x="238" y="10" width="46" height="16" rx="3" fill="#4a044e" />
+      <text x="242" y="22" fill="#f0abfc" font-size="8.5" font-weight="700" class="mono">TOP 4%</text>
+
+      <text x="14" y="40" fill="#64748b" font-size="10" class="mono">Standing:</text>
+      <text x="74" y="40" fill="#f0abfc" font-size="10" font-weight="600" class="mono">LeetCode Knight (1869)</text>
+      <text x="14" y="52" fill="#64748b" font-size="10" class="mono">Problems:</text>
+      <text x="74" y="52" fill="#e2e8f0" font-size="10" font-weight="600" class="mono">1,300+ Solved · CF 1271</text>
+    </g>
+
+    <!-- Bottom Telemetry Ticker -->
+    <g transform="translate(0, 224)">
+      <rect width="295" height="34" rx="5" fill="#0d141f" stroke="#1f2937" stroke-width="1" />
+      <text x="12" y="21" fill="#94a3b8" font-size="9.5" class="mono">Telemetry:</text>
+      <text x="74" y="21" fill="#22c55e" font-size="9.5" class="mono" font-weight="600">OTel</text>
+      <text x="106" y="21" fill="#475569" font-size="9.5" class="mono">|</text>
+      <text x="116" y="21" fill="#38bdf8" font-size="9.5" class="mono" font-weight="600">Prometheus</text>
+      <text x="188" y="21" fill="#475569" font-size="9.5" class="mono">|</text>
+      <text x="198" y="21" fill="#f59e0b" font-size="9.5" class="mono" font-weight="600">Grafana</text>
+      <text x="248" y="21" fill="#475569" font-size="9.5" class="mono">|</text>
+      <text x="258" y="21" fill="#a855f7" font-size="9.5" class="mono" font-weight="600">K8s</text>
     </g>
 
   </g>

@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="./assets/header.svg" width="100%" alt="Dhairya Rupani — Terminal" />
+<img src="./assets/header.svg" width="100%" alt="Dhairya Rupani — Systems Command Center" />
+
+<br/>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/dhairya-rupani"><code>LinkedIn</code></a> &nbsp;·&nbsp;
@@ -15,182 +17,232 @@
 
 ---
 
-### $ cat about.md
+### // 01. ENGINEERING THESIS
 
-I am a final-year Computer Science undergraduate at Ahmedabad University specializing in **Backend Engineering** and **Distributed Systems**.
+> **"Most distributed systems fail not because their core business logic is wrong, but because they fail to handle contention, network unreliability, and uncoordinated load."**
 
-I focus on building resilient, high-throughput backend services that stay fast under high concurrency. My engineering work centers on custom API gateways, distributed rate limiting, fault-isolation architectures, and graph-theoretic optimization algorithms.
+I am a final-year Computer Science undergraduate at Ahmedabad University specializing in **Backend Infrastructure** and **Distributed Systems**.
 
-Beyond systems development, I have a disciplined background in competitive programming: **LeetCode Knight (Rating 1869, Top ~4% globally)** with **1,300+ algorithmic problems solved**, and experience authoring contest problems as a competitive programming event lead.
+My work focuses on the plumbing of software engineering: high-throughput reverse proxies, topology-aware network routing, distributed state synchronization, and graph-theoretic optimization. I approach systems with a strong algorithmic mindset—identifying structural bottlenecks before scaling, designing for fault isolation, and verifying every performance claim with empirical load testing and discrete simulations.
 
 ---
 
-### $ ls -la skills/
+### // 02. FEATURED SYSTEMS
+
+#### 01. [Distributed API Gateway](https://github.com/Dhairya0531/API_Gateway)
+*A high-throughput reverse proxy, traffic-shaping layer, and observability engine for microservices.*
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ WHAT I BUILT                                                                           │
+│ A production-grade distributed API Gateway in Go that intercepts, protects, and routes │
+│ high-concurrency traffic across microservice clusters. Implements atomic Redis sliding-│
+│ window rate limiting, an in-memory 3-state circuit breaker, and distributed telemetry. │
+│                                                                                        │
+│ WHY IT IS INTERESTING                                                                  │
+│ Rather than simple round-robin routing, it implements EWMA (Exponentially Weighted     │
+│ Moving Average) latency tracking to dynamically divert requests away from degrading    │
+│ instances before hard health checks fail. Audit logging is batched asynchronously to    │
+│ PostgreSQL off the hot path, preventing database latency from impacting user requests. │
+│                                                                                        │
+│ VERIFIED BENCHMARK                                                                     │
+│ Sustained 10,020 req/min with 1.89 ms p95 latency (p50: 1.52 ms) and zero dropped      │
+│ requests under simulated load via k6. Containerized with Kubernetes rolling updates.   │
+│                                                                                        │
+│ TECH                                                                                   │
+│ Go 1.25 · Redis · PostgreSQL · Docker · Kubernetes · Prometheus · Grafana · OTel       │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+[ Incoming Client Traffic ]
+            │
+            ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                      Distributed API Gateway (Go)                      │
+│   ┌────────────────────────┐  ┌─────────────────────────────────────┐  │
+│   │ Redis Sliding Window   │  │ Three-State Circuit Breaker         │  │
+│   │ (Atomic Rate Limiter)  │  │ (Closed → Open → Half-Open)         │  │
+│   └────────────────────────┘  └─────────────────────────────────────┘  │
+│   ┌─────────────────────────────────────────────────────────────────┐  │
+│   │ Dynamic Load Balancer: Round-Robin · Least-Connections · EWMA   │  │
+│   └─────────────────────────────────────────────────────────────────┘  │
+│   ┌─────────────────────────────────────────────────────────────────┐  │
+│   │ Telemetry: OpenTelemetry Traces + Prometheus Metric Exporter    │  │
+│   └─────────────────────────────────────────────────────────────────┘  │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    ▼
+                 [ Upstream Microservices / Backends ]
+```
+
+<p align="right">
+  <a href="https://github.com/Dhairya0531/API_Gateway"><strong>Explore Repository &rarr;</strong></a>
+</p>
+
+---
+
+#### 02. [Urban Traffic Signal Optimization using Complex Networks](https://github.com/Dhairya0531/Complex_Network)
+*Graph-theoretic traffic signal coordination leveraging global structural centrality over localized heuristics.*
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ WHAT I BUILT                                                                           │
+│ A discrete-time network simulation framework that ingests OpenStreetMap road networks  │
+│ as weighted directed graphs and schedules signal phase allocations based on structural │
+│ topological importance rather than purely local intersection queue lengths.            │
+│                                                                                        │
+│ WHY IT IS INTERESTING                                                                  │
+│ Conventional adaptive traffic systems (such as Backpressure) optimize only immediate   │
+│ local queues, inadvertently causing severe cascade gridlock at upstream highway hubs.  │
+│ By calculating Betweenness Centrality, the engine scores intersections using:          │
+│ Priority = (α · Queue Length) + (β · Wait Time) + (γ · Betweenness Centrality)         │
+│ prioritizing structural chokepoints and optimizing global network throughput.          │
+│                                                                                        │
+│ VERIFIED RESULTS                                                                       │
+│ Evaluated across 4 metropolitan networks (Bengaluru, Berlin, London, Sydney) on graphs │
+│ up to 12,846 nodes and 28,412 edges. Demonstrated up to +198% throughput improvement   │
+│ over Backpressure and -26.6% travel time reduction over fixed-time controllers.        │
+│                                                                                        │
+│ TECH                                                                                   │
+│ Python · NetworkX · OpenStreetMap (OSMnx) · Graph Theory · Discrete-Time Simulation    │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Dhairya0531/Complex_Network/main/gridlock_comparison.png" width="92%" alt="Simulation Results: Gridlock and Throughput Comparison Across Controllers" />
+  <p><em>Empirical simulation results: Network-wide gridlock progression and throughput across demand levels for Fixed, Backpressure, and Proposed WTM Centrality Controllers.</em></p>
+</div>
+
+<p align="right">
+  <a href="https://github.com/Dhairya0531/Complex_Network"><strong>Explore Repository &rarr;</strong></a>
+</p>
+
+---
+
+#### 03. [TablingTime — University Timetable Automation Platform](https://github.com/PrashamMehta-04/TablingTime-Backend)
+*Full-stack constraint-satisfaction scheduling engine resolving high-dimensional institutional logistics.*
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ WHAT I BUILT                                                                           │
+│ An automated scheduling engine and management platform developed as part of a 6-person │
+│ engineering team, eliminating timetable collisions across an entire university campus. │
+│                                                                                        │
+│ WHY IT IS INTERESTING                                                                  │
+│ Formulated the scheduling domain as a Constraint Satisfaction Problem (CSP) balancing  │
+│ hard constraints (professor non-overlap, classroom capacity limits) and soft targets   │
+│ (student cohort travel windows, lunch gaps). Built real-time room availability APIs.   │
+│                                                                                        │
+│ VERIFIED SCALE                                                                         │
+│ Solves a combinatorial conflict matrix for 350+ courses, 150+ professors, and 2,000+   │
+│ students in under 6 minutes.                                                           │
+│                                                                                        │
+│ TECH                                                                                   │
+│ TypeScript · React.js · Node.js · Express.js · MongoDB · JWT                           │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+<p align="right">
+  <a href="https://github.com/PrashamMehta-04/TablingTime-Backend"><strong>Explore Repository &rarr;</strong></a>
+</p>
+
+---
+
+### // 03. TECHNICAL CAPABILITIES
+
+Organized by engineering discipline and supported by actual repositories:
 
 <table width="100%">
   <thead>
     <tr>
-      <th width="28%" align="left">Domain</th>
-      <th width="72%" align="left">Technologies &amp; Architecture</th>
+      <th width="30%" align="left">Engineering Discipline</th>
+      <th width="70%" align="left">Implemented Technologies &amp; Concepts</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>Languages</strong></td>
-      <td><code>Go</code> · <code>Python</code> · <code>Java</code> · <code>TypeScript</code> · <code>JavaScript</code> · <code>SQL</code></td>
+      <td><strong>Systems &amp; Backend</strong></td>
+      <td><code>Go</code> · <code>Java</code> · <code>Python</code> · <code>RESTful API Design</code> · <code>Microservices</code> · <code>EWMA Load Balancing</code> · <code>Circuit Breakers</code> · <code>Sliding-Window Rate Limiting</code></td>
     </tr>
     <tr>
-      <td><strong>Backend &amp; Systems</strong></td>
-      <td><code>Node.js</code> · <code>Express.js</code> · <code>RESTful API Design</code> · <code>Microservices</code> · <code>Load Balancing (EWMA / Least-Conn)</code> · <code>Circuit Breakers</code> · <code>Idempotency</code></td>
+      <td><strong>Storage &amp; State</strong></td>
+      <td><code>PostgreSQL</code> · <code>Redis (Atomic Scripts, Sliding Windows)</code> · <code>MongoDB</code> · <code>MySQL</code></td>
     </tr>
     <tr>
-      <td><strong>Databases &amp; Caching</strong></td>
-      <td><code>PostgreSQL</code> · <code>Redis (Sliding Window, Atomic Caching)</code> · <code>MongoDB</code> · <code>MySQL</code></td>
+      <td><strong>Infrastructure &amp; Cloud</strong></td>
+      <td><code>Docker</code> · <code>Kubernetes (Rolling Updates, HPA)</code> · <code>AWS (EC2, S3, RDS, VPC, IAM)</code> · <code>Linux / Unix</code></td>
     </tr>
     <tr>
-      <td><strong>Cloud &amp; DevOps</strong></td>
-      <td><code>Docker</code> · <code>Kubernetes (Rolling Updates, HPA)</code> · <code>AWS (EC2, S3, RDS, VPC, IAM)</code></td>
-    </tr>
-    <tr>
-      <td><strong>Observability &amp; Tools</strong></td>
-      <td><code>Prometheus</code> · <code>Grafana</code> · <code>OpenTelemetry</code> · <code>Git</code> · <code>Postman</code> · <code>Linux</code></td>
+      <td><strong>Observability &amp; SRE</strong></td>
+      <td><code>Prometheus</code> · <code>Grafana</code> · <code>OpenTelemetry (Traces &amp; Context Propagation)</code> · <code>Postman</code> · <code>Git</code></td>
     </tr>
     <tr>
       <td><strong>Algorithms &amp; Modeling</strong></td>
-      <td><code>Complex Networks (Betweenness Centrality)</code> · <code>NetworkX</code> · <code>OSMnx</code> · <code>Constraint Satisfaction (CSP)</code></td>
+      <td><code>Graph Theory</code> · <code>Betweenness Centrality</code> · <code>NetworkX</code> · <code>OSMnx</code> · <code>Constraint Satisfaction (CSP)</code></td>
     </tr>
   </tbody>
 </table>
 
 ---
 
-### $ ./list_featured_projects.sh
+### // 04. VERIFIED ENGINEERING EVIDENCE
 
-#### 01. [Distributed API Gateway](https://github.com/Dhairya0531/API_Gateway)
-*Production-grade microservices reverse proxy, traffic shaping, and observability layer.*
+Every metric is backed by empirical testing, automated suites, or verified contest standing:
 
-* **What it solves:** Direct microservice communication creates cascading failures, localized hotspotting, uncoordinated client bursts, and distributed telemetry gaps.
-* **Why it is technically interesting:** Implements pluggable traffic distribution algorithms (**Round-Robin**, **Least-Connections**, and **EWMA latency weighting**), distributed sliding-window rate limiting backed by Redis atomic scripts, and an in-memory three-state **Circuit Breaker** (`Closed` → `Open` → `Half-Open`) with fallback semantics.
-* **Tech Stack:** `Go 1.25` · `Redis` · `PostgreSQL` · `Docker` · `Kubernetes` · `Prometheus` · `Grafana` · `OpenTelemetry`
-* **Important Engineering Detail:** Sustained **10,000+ requests/min** with **p95 latency under 2 ms** (1.89 ms measured) and zero failed requests under simulated load via k6. Audit logs are asynchronously batched to PostgreSQL to protect the hot request path. Deployed with Kubernetes Horizontal Pod Autoscaling.
-* **Code:** [`github.com/Dhairya0531/API_Gateway`](https://github.com/Dhairya0531/API_Gateway)
-
-<details>
-  <summary><strong>View System Topology &amp; Algorithm Notes</strong></summary>
-
-  ```
-  [ Clients ] ──> [ Distributed API Gateway (Go) ]
-                         │
-                         ├──> [ Redis: Sliding-Window Rate Limiter ]
-                         ├──> [ Resilience: Circuit Breaker & Fallbacks ]
-                         ├──> [ Router: EWMA Latency Load Balancer ]
-                         └──> [ Telemetry: OpenTelemetry Traces + Prometheus ]
-                                      │
-                                      ▼
-                        [ Upstream Microservices ]
-  ```
-
-  * **EWMA Routing:** Updates running moving-average latency $S_t = \alpha Y_t + (1 - \alpha) S_{t-1}$ to shift traffic away from degrading instances prior to hard health-check failures.
-  * **Quick Start:**
-    ```bash
-    git clone https://github.com/Dhairya0531/API_Gateway.git
-    docker compose -f docker/docker-compose.yml up --build -d
-    ```
-</details>
-
-<br/>
-
-#### 02. [Urban Traffic Signal Optimization using Complex Networks](https://github.com/Dhairya0531/Complex_Network)
-*Graph-theoretic traffic flow control using structural network centrality over localized heuristics.*
-
-* **What it solves:** Conventional static fixed-time and purely greedy local-queue traffic controllers fail to prevent city-wide gridlock because they ignore structural road network topology and downstream bottleneck accumulation.
-* **Why it is technically interesting:** Models metropolitan road networks as weighted directed graphs using OpenStreetMap data. Computes **Betweenness Centrality** to identify structural traffic chokepoints and incorporates global topology into a dynamic green-split controller:
-  $$\text{Priority} = (\alpha \cdot \text{Queue Length}) + (\beta \cdot \text{Cumulative Wait Time}) + (\gamma \cdot \text{Betweenness Centrality})$$
-* **Tech Stack:** `Python` · `NetworkX` · `OpenStreetMap (OSMnx)` · `Complex Network Analysis` · `Discrete-Time Simulation`
-* **Important Engineering Detail:** Evaluated across 4 global metro topologies (Bengaluru, Berlin, London, Sydney) on graphs with up to **12,846 nodes and 28,412 edges**. Demonstrated up to **+198% throughput improvement** over adaptive Backpressure controllers and reduced travel times by up to **26.6%** over fixed-time baselines across bottleneck corridors.
-* **Code:** [`github.com/Dhairya0531/Complex_Network`](https://github.com/Dhairya0531/Complex_Network)
-
-<details>
-  <summary><strong>View Graph Analysis Details</strong></summary>
-
-  * **Topology Modeling:** Real-world driving graphs ingested via OSMnx with parsed lane counts, speed limits, and intersection flow capacities.
-  * **Demand Synthesis:** Non-uniform traffic demand modeled with stochastic Poisson arrival distributions ($\lambda = 18\text{ vehicles/min}$).
-  * **Betweenness Centrality:** $C_B(v) = \sum_{s \ne v \ne t} \frac{\sigma_{st}(v)}{\sigma_{st}}$, quantifying the exact structural bottleneck frequency of each intersection.
-</details>
-
-<br/>
-
-#### 03. [TablingTime — University Timetable Automation Platform](https://github.com/PrashamMehta-04/TablingTime-Backend)
-*Full-stack constraint-satisfaction scheduling system resolving university-wide academic logistics.*
-
-* **What it solves:** Coordinating conflict-free lecture schedules across 350+ courses, 150+ professors, and 2,000+ students with constrained room capacities creates a high-dimensional combinatorial conflict challenge.
-* **Why it is technically interesting:** Formulates and solves a constraint-satisfaction problem (CSP) enforcing hard bounds (no professor overlaps, room capacity constraints) and soft optimizations (student cohort schedule balance), backed by high-throughput room allocation REST APIs.
-* **Tech Stack:** `React.js` · `TypeScript` · `Node.js` · `Express.js` · `MongoDB` · `JWT`
-* **Important Engineering Detail:** Generates completely conflict-free academic schedules for the entire institution in **under 6 minutes**; engineered real-time room occupancy management endpoints for campus administrative workflows.
-* **Code:** [`github.com/PrashamMehta-04/TablingTime-Backend`](https://github.com/PrashamMehta-04/TablingTime-Backend)
+| Metric / Result | System / Context | Verification Method |
+| :--- | :--- | :--- |
+| **10,020 req/min @ p95 = 1.89 ms** | [Distributed API Gateway](https://github.com/Dhairya0531/API_Gateway) | Load-tested via k6 load generator (zero failures, p50 = 1.52 ms) |
+| **+198% Throughput / -26.6% Delay** | [Traffic Signal Optimization](https://github.com/Dhairya0531/Complex_Network) | Discrete-time simulator benchmarked against Backpressure & Fixed controllers |
+| **12,846 Nodes & 28,412 Edges** | [Complex Network Analysis](https://github.com/Dhairya0531/Complex_Network) | Ingested & modeled OpenStreetMap metro driving networks |
+| **350+ Courses & 2,000+ Students** | [TablingTime Platform](https://github.com/PrashamMehta-04/TablingTime-Backend) | Conflict-free CSP timetable generation in &lt;6 minutes |
+| **1,300+ Problems Solved** | Competitive Programming | **LeetCode Knight (Rating 1869, Top ~4%)** · Codeforces Pupil (1271) |
+| **Contest Problem Setter** | PAIRATHON 2026 | Event Lead; authored 7 original OOP and algorithmic contest problems |
+| **Top 10 Finalist** | Lakshya 2.0 National Hackathon | Ranked Top 10 out of 400+ participants and 120 shortlisted teams |
 
 ---
 
-### $ cat engineering_interests.json
+### // 05. ENGINEERING INTERESTS
 
 ```json
 {
   "distributed_systems": [
-    "Fault tolerance, consensus models, and leader election",
-    "Distributed caching, rate limiting, and circuit breaker patterns",
-    "Microservice resilience and zero-downtime rolling deployments"
+    "Consensus protocols (Raft, Paxos) and distributed state machines",
+    "Cascading failure mitigation: circuit breaking, bulkheading, backpressure",
+    "High-throughput reverse proxies and zero-downtime rolling updates"
   ],
-  "backend_engineering": [
-    "High-throughput, low-latency API design in Go and Node.js",
-    "Database indexing, connection pooling, and transactional consistency",
-    "Asynchronous background workers and audit logging pipelines"
+  "concurrency_and_performance": [
+    "Go runtime concurrency, goroutine orchestration, and memory layout",
+    "Non-blocking I/O, connection pooling, and low-latency API architecture",
+    "Redis atomic Lua execution for lock-free rate limiting"
   ],
-  "systems_modeling": [
-    "Complex network topology analysis and structural graph centrality",
-    "Constraint-satisfaction algorithms (CSP) for scheduling logistics"
-  ],
-  "cloud_and_observability": [
-    "Container orchestration with Kubernetes (HPA, health probes)",
-    "Distributed tracing with OpenTelemetry and metrics collection via Prometheus"
+  "graph_and_flow_optimization": [
+    "Structural network centrality and bottleneck identification",
+    "Combinatorial constraint satisfaction for complex real-world logistics"
   ]
 }
 ```
 
 ---
 
-### $ sysctl -n hw.achievements
+### // 06. CURRENTLY BUILDING & INVESTIGATING
 
-```
-● LeetCode Knight (1869)           Top ~4% globally | 1,300+ DSA problems solved
-● Codeforces Pupil (1271)          Active competitive programming contest participant
-● PAIRATHON 2026                   Event Lead & Problem Setter; authored 7 original OOP/DSA problems
-● Lakshya 2.0 National Hackathon   Top 10 finalist out of 400+ participants and 120 teams
-● AWS Academy                      Cloud Foundations certified (EC2, S3, RDS, VPC, IAM)
-```
+* 🔬 **Distributed Consensus in Go:** Implementing a Raft-based distributed key-value store with leader election and replicated state logs.
+* ⚡ **Kernel-Level Observability:** Exploring eBPF packet inspection to profile ingress proxy latency at the socket layer.
+* ⚔️ **Algorithmic Contest Training:** Regular weekly competitive programming rounds to refine advanced graph and dynamic programming intuition.
 
 ---
 
-### $ tail -n 5 currently_learning.log
+### // 07. DIRECT CONNECTION LINES
 
 ```
-[CURRENT_FOCUS] Deepening Go internals, runtime scheduler ergonomics, and concurrency primitives.
-[CURRENT_FOCUS] Studying distributed consensus implementations (Raft state machines and log replication).
-[CURRENT_FOCUS] Refining telemetry architectures with OpenTelemetry distributed trace context propagation.
-```
-
----
-
-### $ ./connect.sh
-
-```
-  Email      :  dhairyarupani31@gmail.com
-  LinkedIn   :  https://linkedin.com/in/dhairya-rupani
-  GitHub     :  https://github.com/Dhairya0531
-  Portfolio  :  https://dhairya0531.github.io/portfolio/
-  LeetCode   :  https://leetcode.com/u/Dhairya05/
-  Codeforces :  https://codeforces.com/profile/Dhairya05
+  Email       ::  dhairyarupani31@gmail.com
+  LinkedIn    ::  https://linkedin.com/in/dhairya-rupani
+  GitHub      ::  https://github.com/Dhairya0531
+  Portfolio   ::  https://dhairya0531.github.io/portfolio/
+  LeetCode    ::  https://leetcode.com/u/Dhairya05/
+  Codeforces  ::  https://codeforces.com/profile/Dhairya05
 ```
 
 <div align="center">
-  <sub>Designed with Unix CLI simplicity. Built for performance and reliability.</sub>
+  <sub>Engineered for resilience and deterministic performance under contention.</sub>
 </div>
