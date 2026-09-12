@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 320" width="850" height="320" fill="none">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e131f" />
+      <stop offset="100%" stop-color="#080c14" />
+    </linearGradient>
+
+    <!-- Node Glow Filter -->
+    <filter id="nodeGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Cyan Glow Filter -->
+    <filter id="cyanGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Pulsing Marker Dot -->
+    <linearGradient id="packetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    @keyframes flowLine {
+      from { stroke-dashoffset: 60; }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes pulseRing {
+      0% { r: 5; opacity: 1; }
+      100% { r: 18; opacity: 0; }
+    }
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    @keyframes packetHop1 {
+      0% { cx: 110; cy: 155; opacity: 0; }
+      10% { opacity: 1; }
+      40% { cx: 270; cy: 155; opacity: 1; }
+      70% { cx: 470; cy: 155; opacity: 1; }
+      100% { cx: 660; cy: 90; opacity: 0; }
+    }
+    @keyframes packetHop2 {
+      0% { cx: 110; cy: 155; opacity: 0; }
+      10% { opacity: 1; }
+      40% { cx: 270; cy: 155; opacity: 1; }
+      70% { cx: 470; cy: 155; opacity: 1; }
+      100% { cx: 660; cy: 160; opacity: 0; }
+    }
+    @keyframes packetHop3 {
+      0% { cx: 110; cy: 155; opacity: 0; }
+      10% { opacity: 1; }
+      40% { cx: 270; cy: 155; opacity: 1; }
+      70% { cx: 470; cy: 155; opacity: 1; }
+      100% { cx: 660; cy: 230; opacity: 0; }
+    }
+
+    .flow-path {
+      stroke-dasharray: 6, 6;
+      animation: flowLine 2s linear infinite;
+    }
+    .flow-fast {
+      stroke-dasharray: 4, 4;
+      animation: flowLine 1.2s linear infinite;
+    }
+    .pulse-beacon {
+      animation: statusBlink 1.8s ease-in-out infinite;
+    }
+    .packet-1 {
+      animation: packetHop1 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .packet-2 {
+      animation: packetHop2 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.8s;
+    }
+    .packet-3 {
+      animation: packetHop3 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.6s;
+    }
+    .code-font {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+    }
+  </style>
+
+  <!-- Canvas Container -->
+  <rect x="5" y="5" width="840" height="310" rx="14" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Canvas Header -->
+  <rect x="5" y="5" width="840" height="38" rx="14" fill="#111827" />
+  <line x1="5" y1="43" x2="845" y2="43" stroke="#1f2937" stroke-width="1" />
+  <text x="24" y="27" fill="#38bdf8" font-size="12" class="code-font" font-weight="700">LIVE SYSTEM TOPOLOGY</text>
+  <text x="195" y="27" fill="#64748b" font-size="11" class="code-font">| Distributed API Gateway Engine (Go 1.25)</text>
+  <circle cx="805" cy="24" r="4.5" fill="#22c55e" class="pulse-beacon" />
+  <text x="817" y="27" fill="#22c55e" font-size="10.5" class="code-font" font-weight="600">HEALTHY</text>
+
+  <!-- Connection Lines (Underneath Nodes) -->
+  <!-- Client -> Gateway -->
+  <line x1="120" y1="155" x2="270" y2="155" stroke="#38bdf8" stroke-width="2" class="flow-path" opacity="0.8" />
+
+  <!-- Gateway -> Redis Cache & Rate Limiter -->
+  <line x1="380" y1="120" x2="380" y2="75" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="4,4" class="flow-path" opacity="0.7" />
+
+  <!-- Gateway -> Upstream Services (Branches) -->
+  <path d="M 490,155 C 560,155 580,90 650,90" fill="none" stroke="#34d399" stroke-width="2" class="flow-path" opacity="0.85" />
+  <path d="M 490,155 C 560,155 580,160 650,160" fill="none" stroke="#38bdf8" stroke-width="2" class="flow-path" opacity="0.85" />
+  <path d="M 490,155 C 560,155 580,230 650,230" fill="none" stroke="#a855f7" stroke-width="2" class="flow-path" opacity="0.85" />
+
+  <!-- Gateway -> Telemetry (Prometheus/Grafana) -->
+  <path d="M 380,210 C 380,250 420,265 470,265" fill="none" stroke="#f59e0b" stroke-width="1.6" stroke-dasharray="5,5" class="flow-fast" opacity="0.8" />
+
+  <!-- Animated Flying Data Packets -->
+  <circle class="packet-1" r="5" fill="#38bdf8" filter="url(#cyanGlow)" />
+  <circle class="packet-2" r="5" fill="#34d399" filter="url(#cyanGlow)" />
+  <circle class="packet-3" r="5" fill="#c084fc" filter="url(#cyanGlow)" />
+
+  <!-- ================= NODE 1: CLIENTS ================= -->
+  <g transform="translate(30, 115)">
+    <rect width="90" height="80" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <text x="45" y="32" fill="#94a3b8" font-size="20" text-anchor="middle">🌐</text>
+    <text x="45" y="52" fill="#f1f5f9" font-size="11" font-weight="600" class="code-font" text-anchor="middle">Clients</text>
+    <text x="45" y="67" fill="#64748b" font-size="9" class="code-font" text-anchor="middle">HTTP / gRPC</text>
+  </g>
+
+  <!-- ================= NODE 2: REDIS STATE (TOP) ================= -->
+  <g transform="translate(320, 50)">
+    <rect width="125" height="38" rx="8" fill="#1c1917" stroke="#ef4444" stroke-width="1.2" />
+    <circle cx="15" cy="19" r="4" fill="#ef4444" />
+    <text x="26" y="23" fill="#fca5a5" font-size="10.5" font-weight="600" class="code-font">Redis Limiter</text>
+  </g>
+
+  <!-- ================= NODE 3: GATEWAY CORE (CENTER) ================= -->
+  <g transform="translate(260, 105)">
+    <!-- Outer Glow Box -->
+    <rect width="230" height="100" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="2" filter="url(#nodeGlow)" opacity="0.3" />
+    <rect width="230" height="100" rx="12" fill="#0b1324" stroke="#38bdf8" stroke-width="1.8" />
+    
+    <rect x="12" y="10" width="8" height="8" rx="2" fill="#38bdf8" />
+    <text x="28" y="18" fill="#38bdf8" font-size="12" font-weight="700" class="code-font">API Gateway (Go)</text>
+    <text x="180" y="18" fill="#22c55e" font-size="9.5" font-weight="600" class="code-font">p95 &lt; 2ms</text>
+
+    <!-- Sub-modules inside Gateway -->
+    <rect x="12" y="32" width="98" height="24" rx="5" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="61" y="47" fill="#cbd5e1" font-size="9" class="code-font" text-anchor="middle">Sliding Window</text>
+
+    <rect x="118" y="32" width="98" height="24" rx="5" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="167" y="47" fill="#cbd5e1" font-size="9" class="code-font" text-anchor="middle">Circuit Breaker</text>
+
+    <rect x="12" y="62" width="204" height="26" rx="5" fill="#13273e" stroke="#1e40af" stroke-width="1" />
+    <text x="114" y="79" fill="#93c5fd" font-size="10" font-weight="600" class="code-font" text-anchor="middle">⚡ Dynamic EWMA Load Balancer</text>
+  </g>
+
+  <!-- ================= NODE 4: TELEMETRY (BOTTOM) ================= -->
+  <g transform="translate(470, 245)">
+    <rect width="210" height="42" rx="8" fill="#1c1917" stroke="#f59e0b" stroke-width="1.2" />
+    <text x="15" y="26" fill="#fcd34d" font-size="11" font-weight="600" class="code-font">📊 Prometheus + Grafana</text>
+    <text x="165" y="26" fill="#22c55e" font-size="9" class="code-font">Traces</text>
+  </g>
+
+  <!-- ================= UPSTREAM MICROSERVICES (RIGHT) ================= -->
+  <!-- Upstream 1: Service Alpha -->
+  <g transform="translate(650, 70)">
+    <rect width="165" height="40" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.2" />
+    <circle cx="16" cy="20" r="4" fill="#34d399" class="pulse-beacon" />
+    <text x="28" y="24" fill="#a7f3d0" font-size="10.5" font-weight="600" class="code-font">Microservice A (Auth)</text>
+  </g>
+
+  <!-- Upstream 2: Service Beta -->
+  <g transform="translate(650, 140)">
+    <rect width="165" height="40" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1.2" />
+    <circle cx="16" cy="20" r="4" fill="#38bdf8" class="pulse-beacon" />
+    <text x="28" y="24" fill="#bae6fd" font-size="10.5" font-weight="600" class="code-font">Microservice B (Core)</text>
+  </g>
+
+  <!-- Upstream 3: Service Gamma -->
+  <g transform="translate(650, 210)">
+    <rect width="165" height="40" rx="8" fill="#3b0764" stroke="#9333ea" stroke-width="1.2" />
+    <circle cx="16" cy="20" r="4" fill="#c084fc" class="pulse-beacon" />
+    <text x="28" y="24" fill="#e9d5ff" font-size="10.5" font-weight="600" class="code-font">Microservice C (Data)</text>
+  </g>
+</svg>

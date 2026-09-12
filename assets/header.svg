@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 220" width="850" height="220" fill="none">
+  <defs>
+    <linearGradient id="terminalBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8">
+        <animate attributeName="stop-color" values="#38bdf8;#818cf8;#c084fc;#38bdf8" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="50%" stop-color="#818cf8">
+        <animate attributeName="stop-color" values="#818cf8;#c084fc;#38bdf8;#818cf8" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#34d399">
+        <animate attributeName="stop-color" values="#34d399;#38bdf8;#818cf8;#34d399" dur="8s" repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117" />
+      <stop offset="100%" stop-color="#0b0f15" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    @keyframes typeLine1 {
+      0% { width: 0; }
+      20%, 100% { width: 440px; }
+    }
+    @keyframes typeLine2 {
+      0%, 25% { width: 0; opacity: 0; }
+      30% { opacity: 1; }
+      55%, 100% { width: 620px; opacity: 1; }
+    }
+    @keyframes typeLine3 {
+      0%, 60% { width: 0; opacity: 0; }
+      65% { opacity: 1; }
+      90%, 100% { width: 590px; opacity: 1; }
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+    .cursor {
+      animation: blink 0.9s infinite;
+    }
+    .status-dot {
+      transform-origin: center;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    .terminal-text {
+      font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+  </style>
+
+  <!-- Glowing Outer Ambient Shadow -->
+  <rect x="15" y="15" width="820" height="190" rx="14" fill="none" stroke="url(#terminalBorder)" stroke-width="2" opacity="0.35" filter="url(#glow)" />
+
+  <!-- Terminal Window Background -->
+  <rect x="15" y="15" width="820" height="190" rx="14" fill="url(#cardBg)" stroke="url(#terminalBorder)" stroke-width="1.6" />
+
+  <!-- Window Header Bar -->
+  <path d="M 15,29 A 14,14 0 0 1 29,15 L 821,15 A 14,14 0 0 1 835,29 L 835,46 L 15,46 Z" fill="#161b22" />
+  <line x1="15" y1="46" x2="835" y2="46" stroke="#21262d" stroke-width="1" />
+
+  <!-- Window Control Buttons -->
+  <circle cx="38" cy="31" r="5.5" fill="#ff5f56" />
+  <circle cx="56" cy="31" r="5.5" fill="#ffbd2e" />
+  <circle cx="74" cy="31" r="5.5" fill="#27c93f" />
+
+  <!-- Window Title -->
+  <text x="425" y="34" fill="#8b949e" font-size="11.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" font-weight="500">dhairya@distributed-systems: ~ (zsh)</text>
+
+  <!-- Live Status Beacon -->
+  <circle class="status-dot" cx="785" cy="31" r="4" fill="#22c55e" />
+  <text x="795" y="34" fill="#34d399" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="600">LIVE</text>
+
+  <!-- Terminal Command Line -->
+  <g transform="translate(36, 75)">
+    <!-- Shell Prompt -->
+    <text x="0" y="0" fill="#38bdf8" class="terminal-text" font-weight="700">➜</text>
+    <text x="18" y="0" fill="#a78bfa" class="terminal-text" font-weight="600">gateway</text>
+    <text x="76" y="0" fill="#818cf8" class="terminal-text">git:(</text>
+    <text x="110" y="0" fill="#f43f5e" class="terminal-text">main</text>
+    <text x="140" y="0" fill="#818cf8" class="terminal-text">)</text>
+    <text x="156" y="0" fill="#e2e8f0" class="terminal-text">dhairya --status --metrics</text>
+  </g>
+
+  <!-- Terminal Output Lines with typing / reveal -->
+  <g transform="translate(36, 108)">
+    <text x="0" y="0" fill="#22c55e" class="terminal-text" font-weight="700">●</text>
+    <text x="16" y="0" fill="#f8fafc" class="terminal-text" font-weight="600">Dhairya Rupani</text>
+    <text x="135" y="0" fill="#64748b" class="terminal-text">—</text>
+    <text x="150" y="0" fill="#38bdf8" class="terminal-text" font-weight="500">Backend &amp; Distributed Systems Engineer</text>
+  </g>
+
+  <g transform="translate(36, 136)">
+    <text x="16" y="0" fill="#94a3b8" class="terminal-text">Metrics :</text>
+    <text x="96" y="0" fill="#34d399" class="terminal-text" font-weight="600">10k+ req/min</text>
+    <text x="200" y="0" fill="#64748b" class="terminal-text">|</text>
+    <text x="215" y="0" fill="#34d399" class="terminal-text" font-weight="600">p95 &lt; 2ms</text>
+    <text x="298" y="0" fill="#64748b" class="terminal-text">|</text>
+    <text x="313" y="0" fill="#fbbf24" class="terminal-text" font-weight="600">LeetCode Knight (1869)</text>
+    <text x="500" y="0" fill="#64748b" class="terminal-text">|</text>
+    <text x="515" y="0" fill="#c084fc" class="terminal-text" font-weight="600">1,300+ DSA</text>
+  </g>
+
+  <g transform="translate(36, 164)">
+    <text x="16" y="0" fill="#94a3b8" class="terminal-text">Stack   :</text>
+    <text x="96" y="0" fill="#e2e8f0" class="terminal-text">Go • Python • Redis • PostgreSQL • Docker • Kubernetes • Prometheus</text>
+  </g>
+
+  <!-- Active Cursor -->
+  <g transform="translate(36, 190)">
+    <text x="0" y="0" fill="#38bdf8" class="terminal-text" font-weight="700">➜</text>
+    <text x="18" y="0" fill="#a78bfa" class="terminal-text" font-weight="600">ready</text>
+    <text x="64" y="0" fill="#38bdf8" class="terminal-text cursor" font-weight="900">█</text>
+  </g>
+</svg>
